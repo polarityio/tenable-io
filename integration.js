@@ -5,7 +5,6 @@ const polarityResult = require('./src/create-result-object');
 const { parseErrorToReadableJSON } = require('./src/errors');
 const { getLogger, setLogger } = require('./src/logger');
 const getAssets = require('./src/getAssets');
-const { map } = require('lodash/fp');
 
 let Logger = null;
 
@@ -26,9 +25,8 @@ async function doLookup(entities, options, cb) {
 
   try {
     const results = await getAssets(entities);
-    Logger.trace({ results }, 'results-aaaa');
 
-    const lookupResults = polarityResult.createResultsObject(results);
+    const lookupResults = polarityResult.buildResults(results);
 
     Logger.trace({ lookupResults }, 'lookup results');
     cb(null, lookupResults);
