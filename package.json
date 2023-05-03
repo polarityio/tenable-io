@@ -1,7 +1,7 @@
 {
   "main": "./integration.js",
   "name": "tenableIO",
-  "version": "3.0.ffff-beta",
+  "version": "3.0.0",
   "private": true,
   "license": "MIT",
   "author": "Polarity",
