@@ -6,9 +6,14 @@
     >View in Tenable.io
       {{fa-icon 'external-link-square' fixedWidth=true class='external-link'}}</a>
   </div>
-
   <div class='asset-info'>
     <h1 class='p-title'>{{fa-icon icon='info-square'}} Asset Information: </h1>
+    {{#if source.first_seen}}
+      <div>
+        <span class='p-key'>First Seen:</span>
+        <span class='p-value'>{{moment-format source.first_seen timeZone=timezone}}</span>
+      </div>
+    {{/if}}
     {{#if asset.last_seen}}
       <div>
         <span class='p-key'>Last Seen: :</span>
@@ -28,78 +33,87 @@
           <span class='p-value'>{{source.name}}</span>
         </div>
       {{/if}}
-      {{#if source.first_seen}}
+    {{/each}}
+    {{#each asset.operating_system as |os|}}
+      {{#if os}}
         <div>
-          <span class='p-key'>First Seen:</span>
-          <span class='p-value'>{{moment-format
-              source.first_seen
-              timeZone=timezone
-            }}</span>
+          <span class='p-key'>Operating System:</span>
+          <span class='p-value'>{{os}}</span>
+        </div>
+      {{/if}}
+    {{/each}}
+    {{#each asset.fqdn as |fqdn|}}
+      {{#if fqdn}}
+        <div>
+          <span class='p-key'>FQDN:</span>
+          <span class='p-value'>{{fqdn}}</span>
+        </div>
+      {{/if}}
+    {{/each}}
+    {{#each asset.hostname as |host|}}
+      {{#if host}}
+        <div>
+          <span class='p-key'>Hostname:</span>
+          <span class='p-value'>{{host}}</span>
         </div>
       {{/if}}
     {{/each}}
   </div>
-
   <div class='vulnerability-info'>
     <h1 class='p-title'>{{fa-icon icon='bullseye'}} Vulnerability Information: </h1>
-
     <div class='scrollable-block'>
-      <table>
-        <tbody>
-          {{#each vulnerabilities.vulnerabilities as |result|}}
-            <div class='vulnerability-container'>
-              {{#if result.plugin_id}}
-                <div>
-                  <span class='p-key'>Plugin ID:</span>
-                  <span class='p-value'>{{result.plugin_id}}</span>
-                </div>
-              {{/if}}
-              {{#if result.count}}
-                <div>
-                  <span class='p-key'>Count:</span>
-                  <span class='p-value'>{{result.count}}</span>
-                </div>
-              {{/if}}
-              {{#if result.plugin_family}}
-                <div>
-                  <span class='p-key'>Plugin Family:</span>
-                  <span class='p-value'>{{result.plugin_family}}</span>
-                </div>
-              {{/if}}
-              {{#if result.plugin_name}}
-                <div>
-                  <span class='p-key'>Plugin Name:</span>
-                  <span class='p-value'>{{result.plugin_name}}</span>
-                </div>
-              {{/if}}
-              {{#if result.vulnerability_state}}
-                <div>
-                  <span class='p-key'>Vulnerability State:</span>
-                  <span class='p-value'>{{result.vulnerability_state}}</span>
-                </div>
-              {{/if}}
-              {{#if result.accepted_count}}
-                <div>
-                  <span class='p-key'>Accepted Count:</span>
-                  <span class='p-value'>{{result.accepted_count}}</span>
-                </div>
-              {{/if}}
-              {{#if result.recasted_count}}
-                <div>
-                  <span class='p-key'>Recasted Count:</span>
-                  <span class='p-value'>{{result.recasted_count}}</span>
-                </div>
-              {{/if}}
-              {{#if result.cvss_base_score}}
-                <div>
-                  <span class='p-key'>CVSS Base Score:</span>
-                  <span class='p-value'>{{result.cvss_base_score}}</span>
-                </div>
-              {{/if}}
+      {{#each vulnerabilities.vulnerabilities as |result|}}
+        <div class='vulnerability-container'>
+          {{#if result.plugin_id}}
+            <div>
+              <span class='p-key'>Plugin ID:</span>
+              <span class='p-value'>{{result.plugin_id}}</span>
             </div>
-          {{/each}}
-        </tbody>
-      </table>
+          {{/if}}
+          {{#if result.count}}
+            <div>
+              <span class='p-key'>Count:</span>
+              <span class='p-value'>{{result.count}}</span>
+            </div>
+          {{/if}}
+          {{#if result.plugin_family}}
+            <div>
+              <span class='p-key'>Plugin Family:</span>
+              <span class='p-value'>{{result.plugin_family}}</span>
+            </div>
+          {{/if}}
+          {{#if result.plugin_name}}
+            <div>
+              <span class='p-key'>Plugin Name:</span>
+              <span class='p-value'>{{result.plugin_name}}</span>
+            </div>
+          {{/if}}
+          {{#if result.vulnerability_state}}
+            <div>
+              <span class='p-key'>Vulnerability State:</span>
+              <span class='p-value'>{{result.vulnerability_state}}</span>
+            </div>
+          {{/if}}
+          {{#if result.accepted_count}}
+            <div>
+              <span class='p-key'>Accepted Count:</span>
+              <span class='p-value'>{{result.accepted_count}}</span>
+            </div>
+          {{/if}}
+          {{#if result.recasted_count}}
+            <div>
+              <span class='p-key'>Recasted Count:</span>
+              <span class='p-value'>{{result.recasted_count}}</span>
+            </div>
+          {{/if}}
+          {{#if result.cvss_base_score}}
+            <div>
+              <span class='p-key'>CVSS Base Score:</span>
+              <span class='p-value'>{{result.cvss_base_score}}</span>
+            </div>
+          {{/if}}
+        </div>
+      {{/each}}
     </div>
   </div>
 {{/if}}
