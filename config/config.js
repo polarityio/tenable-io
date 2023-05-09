@@ -3,7 +3,7 @@ module.exports = {
   acronym: 'TNIO',
   description:
     'Tenable.io is a cloud-based vulnerability management platform that helps organizations identify and remediate vulnerabilities across their IT infrastructure.',
-  entityTypes: ['ip', 'ipv4', 'ipv6', 'domain', 'cve'],
+  entityTypes: ['ip', 'ipv4', 'ipv6', 'domain'],
   styles: ['./styles/styles.less'],
   defaultColor: 'light-blue',
   block: {
