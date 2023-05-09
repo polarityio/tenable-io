@@ -1,13 +1,13 @@
 {{#if details}}
   <div class='tenable-link'>
     <a
-      class='p-link'
-      href='{{block.userOptions.url}}/tio/app.html#/assets-uw/hosts-assets/details/{{asset.id}}/findings'
+            class='p-link'
+            href='https://cloud.tenable.com/tio/app.html#/assets-uw/hosts-assets/details/{{asset.id}}/findings'
     >View in Tenable.io
       {{fa-icon 'external-link-square' fixedWidth=true class='external-link'}}</a>
   </div>
   <div class='asset-info'>
-    <h1 class='p-title'>{{fa-icon icon='info-square'}} Asset Information: </h1>
+    <h1 class='p-title'>{{fa-icon icon='info-square'}} Asset Information</h1>
     {{#if source.first_seen}}
       <div>
         <span class='p-key'>First Seen:</span>
@@ -60,7 +60,7 @@
     {{/each}}
   </div>
   <div class='vulnerability-info'>
-    <h1 class='p-title'>{{fa-icon icon='bullseye'}} Vulnerability Information: </h1>
+    <h1 class='p-title'>{{fa-icon icon='bullseye'}} Vulnerability Information</h1>
     <div class='scrollable-block'>
       {{#each vulnerabilities.vulnerabilities as |result|}}
         <div class='vulnerability-container'>
@@ -85,7 +85,7 @@
           {{#if result.plugin_name}}
             <div>
               <span class='p-key'>Plugin Name:</span>
-              <span class='p-value'>{{result.plugin_name}}</span>
+              <span class='p-block'>{{result.plugin_name}}</span>
             </div>
           {{/if}}
           {{#if result.vulnerability_state}}

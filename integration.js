@@ -39,15 +39,7 @@ async function doLookup(entities, options, cb) {
 
 function validateOptions(userOptions, cb) {
   const errors = [];
-  if (
-    typeof userOptions.url.value !== 'string' ||
-    (typeof userOptions.url.value === 'string' && userOptions.url.value.length === 0)
-  ) {
-    errors.push({
-      key: 'url',
-      message: 'You must provide a URL.'
-    });
-  }
+
   if (
     typeof userOptions.accessKey.value !== 'string' ||
     (typeof userOptions.accessKey.value === 'string' &&
