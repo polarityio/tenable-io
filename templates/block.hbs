@@ -8,12 +8,6 @@
   </div>
   <div class='asset-info'>
     <h1 class='p-title'>{{fa-icon icon='info-square'}} Asset Information: </h1>
-    {{#if source.first_seen}}
-      <div>
-        <span class='p-key'>First Seen:</span>
-        <span class='p-value'>{{moment-format source.first_seen timeZone=timezone}}</span>
-      </div>
-    {{/if}}
     {{#if asset.last_seen}}
       <div>
         <span class='p-key'>Last Seen: :</span>
@@ -31,6 +25,15 @@
         <div>
           <span class='p-key'>Name:</span>
           <span class='p-value'>{{source.name}}</span>
+        </div>
+      {{/if}}
+      {{#if source.first_seen}}
+        <div>
+          <span class='p-key'>First Seen:</span>
+          <span class='p-value'>{{moment-format
+              source.first_seen
+              timeZone=timezone
+            }}</span>
         </div>
       {{/if}}
     {{/each}}
@@ -59,61 +62,96 @@
       {{/if}}
     {{/each}}
   </div>
-  <div class='vulnerability-info'>
-    <h1 class='p-title'>{{fa-icon icon='bullseye'}} Vulnerability Information: </h1>
-    <div class='scrollable-block'>
-      {{#each vulnerabilities.vulnerabilities as |result|}}
-        <div class='vulnerability-container'>
-          {{#if result.plugin_id}}
-            <div>
-              <span class='p-key'>Plugin ID:</span>
-              <span class='p-value'>{{result.plugin_id}}</span>
-            </div>
-          {{/if}}
-          {{#if result.count}}
-            <div>
-              <span class='p-key'>Count:</span>
-              <span class='p-value'>{{result.count}}</span>
-            </div>
-          {{/if}}
-          {{#if result.plugin_family}}
-            <div>
-              <span class='p-key'>Plugin Family:</span>
-              <span class='p-value'>{{result.plugin_family}}</span>
-            </div>
-          {{/if}}
-          {{#if result.plugin_name}}
-            <div>
-              <span class='p-key'>Plugin Name:</span>
-              <span class='p-value'>{{result.plugin_name}}</span>
-            </div>
-          {{/if}}
-          {{#if result.vulnerability_state}}
-            <div>
-              <span class='p-key'>Vulnerability State:</span>
-              <span class='p-value'>{{result.vulnerability_state}}</span>
-            </div>
-          {{/if}}
-          {{#if result.accepted_count}}
-            <div>
-              <span class='p-key'>Accepted Count:</span>
-              <span class='p-value'>{{result.accepted_count}}</span>
-            </div>
-          {{/if}}
-          {{#if result.recasted_count}}
-            <div>
-              <span class='p-key'>Recasted Count:</span>
-              <span class='p-value'>{{result.recasted_count}}</span>
-            </div>
-          {{/if}}
-          {{#if result.cvss_base_score}}
-            <div>
-              <span class='p-key'>CVSS Base Score:</span>
-              <span class='p-value'>{{result.cvss_base_score}}</span>
-            </div>
-          {{/if}}
-        </div>
-      {{/each}}
-    </div>
+  <div class='severity-levels'>
+    <ul>
+      <li><span class='critical'>{{severityPercentages.critical.count}}</span>
+        Critical:
+        <span>{{severityPercentages.critical.percent}}%</span></li>
+      <li><span class='high'>{{severityPercentages.high.count}}</span>
+        High:
+        <span>{{severityPercentages.high.percent}}%</span></li>
+      <li><span class='medium'>{{severityPercentages.medium.count}}</span>
+        Medium:
+        <span>{{severityPercentages.medium.percent}}%</span></li>
+      <li><span class='low'>{{severityPercentages.low.count}}</span>
+        Low:
+        <span>{{severityPercentages.low.percent}}%</span></li>
+      <li><span class='info'>{{severityPercentages.info.count}}</span>
+        Info:
+        <span>{{severityPercentages.info.percent}}%</span></li>
+    </ul>
   </div>
+
+  <div class='toggle-header'>
+    <span class='p-action' {{action 'toggleVulnerabilityDetails'}}>
+      Show Vulnerability Details
+      {{fa-icon (if showVulnerabilityDetails 'caret-up' 'caret-down') fixedWidth=true}}
+    </span>
+  </div>
+
+  {{#if showVulnerabilityDetails}}
+    <div class='vulnerability-info'>
+      <h1 class='p-title'>{{fa-icon icon='bullseye'}} Vulnerability Information: </h1>
+      <div class='scrollable-block'>
+        {{#each vulnerabilities.vulnerabilities as |result|}}
+          <div class='vulnerability-container'>
+            {{#if result.plugin_id}}
+              <div>
+                <span class='p-key'>Plugin ID:</span>
+                <span class='p-value'>{{result.plugin_id}}</span>
+              </div>
+            {{/if}}
+            {{#if result.count}}
+              <div>
+                <span class='p-key'>Count:</span>
+                <span class='p-value'>{{result.count}}</span>
+              </div>
+            {{/if}}
+            {{#if result.plugin_family}}
+              <div>
+                <span class='p-key'>Plugin Family:</span>
+                <span class='p-value'>{{result.plugin_family}}</span>
+              </div>
+            {{/if}}
+            {{#if result.plugin_name}}
+              <div>
+                <span class='p-key'>Plugin Name:</span>
+                <span class='p-value'>{{result.plugin_name}}</span>
+              </div>
+            {{/if}}
+            {{#if result.vulnerability_state}}
+              <div>
+                <span class='p-key'>Vulnerability State:</span>
+                <span class='p-value'>{{result.vulnerability_state}}</span>
+              </div>
+            {{/if}}
+            {{#if result.accepted_count}}
+              <div>
+                <span class='p-key'>Accepted Count:</span>
+                <span class='p-value'>{{result.accepted_count}}</span>
+              </div>
+            {{/if}}
+            {{#if result.recasted_count}}
+              <div>
+                <span class='p-key'>Recasted Count:</span>
+                <span class='p-value'>{{result.recasted_count}}</span>
+              </div>
+            {{/if}}
+            {{#if result.cvss_base_score}}
+              <div>
+                <span class='p-key'>CVSS Base Score:</span>
+                <span class='p-value'>{{result.cvss_base_score}}</span>
+              </div>
+            {{/if}}
+            {{#if result.severity}}
+              <div>
+                <span class='p-key'>Severity:</span>
+                <span class='p-value'>{{result.severity}}</span>
+              </div>
+            {{/if}}
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  {{/if}}
 {{/if}}

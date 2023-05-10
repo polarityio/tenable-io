@@ -95,9 +95,8 @@ class PolarityRequest {
         if (err) {
           return reject(
             new NetworkError(
-              `Network Error: The server you are trying to connect to is unavailable`,
+              `Network Error: The server you are trying to connect to is unavailable Check your Tenant URL in the Polarity user options.`,
               {
-                cause: err,
                 requestOptions
               }
             )
