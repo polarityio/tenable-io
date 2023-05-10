@@ -1,9 +1,9 @@
 module.exports = {
-  name: 'tenable.io',
-  acronym: 'TNIO',
+  name: 'Tenable.io',
+  acronym: 'TEN',
   description:
     'Tenable.io is a cloud-based vulnerability management platform that helps organizations identify and remediate vulnerabilities across their IT infrastructure.',
-  entityTypes: ['ip', 'ipv4', 'ipv6', 'domain', 'cve'],
+  entityTypes: ['ip', 'ipv4', 'ipv6', 'domain'],
   styles: ['./styles/styles.less'],
   defaultColor: 'light-blue',
   block: {
@@ -27,19 +27,10 @@ module.exports = {
   },
   options: [
     {
-      key: 'url',
-      name: 'Tenable.io URL',
-      description: 'URLfor TenableIo instance.',
-      default: 'https://cloud.tenable.com',
-      type: 'text',
-      userCanEdit: false,
-      adminOnly: true
-    },
-    {
       key: 'accessKey',
       name: 'Access Key',
       description:
-        'The Tenable.io access key generated in Tenable io user dashboard. For more information: https://docs.tenable.com/tenableio/Content/Platform/Settings/MyAccount/GenerateAPIKey.htm',
+        'The Tenable.io access key generated in Tenable io user dashboard. For more information see https://docs.tenable.com/tenableio/Content/Platform/Settings/MyAccount/GenerateAPIKey.htm',
       default: '',
       type: 'password',
       userCanEdit: false,
@@ -49,7 +40,7 @@ module.exports = {
       key: 'secretKey',
       name: 'Secret Key',
       description:
-        'The Tenable.io secret key generated in the Tenable io user dashboard.',
+        'The Tenable.io secret key generated in the Tenable.io user dashboard.',
       default: '',
       type: 'password',
       userCanEdit: false,

@@ -80,7 +80,7 @@ class PolarityRequest {
 
     const requestOptionsObj = {
       method: reqOpts.method,
-      url: this.options.url + reqOpts.path,
+      url: `https://cloud.tenable.com${reqOpts.path}`,
       headers: this.headers,
       ...reqOpts
     };

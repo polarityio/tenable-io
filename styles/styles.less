@@ -1,10 +1,14 @@
 .vulnerability-container {
-  padding-left: 10px;
-  margin-bottom: 10px;
+  margin-top: 10px;
+
+  &:first-child {
+    margin-top: 0px;
+  }
 }
 
-.vulnerability-container > div:first-child {
-  margin-top: 0px;
+.p-block {
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .asset-info {
@@ -17,10 +21,7 @@
   max-height: 300px;
   width: 100%;
   border: 1px solid;
-
-  &.padded {
-    padding: 5px;
-  }
+  padding: 5px;
 }
 
 .severity-levels ul {
