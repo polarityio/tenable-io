@@ -6,7 +6,7 @@ The Polarity Tenable.io integration allows users to search for assets and associ
 
 To learn more about Tenable IO, visit the [official website](www.tenable.com).
 
-<img src="./assets/overlay.png" width="50%">
+<img src="./images/overlay.png" width="50%">
 
 ## Tenable IO Integration Options
 
