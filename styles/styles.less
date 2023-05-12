@@ -20,8 +20,13 @@
   overflow-y: auto;
   max-height: 300px;
   width: 100%;
-  border: 1px solid;
+  border: 1px solid #dee2e6;
   padding: 5px;
+}
+
+.external-link {
+  font-size: 8px;
+  margin-bottom: 1px;
 }
 
 .severity-levels ul {
@@ -31,7 +36,7 @@
 }
 
 .severity-levels li {
-  padding: 5px 0;
+  line-height: 1.2em;
 }
 
 .severity-levels li span {
@@ -65,6 +70,49 @@
 }
 
 .toggle-header {
-  margin-top: 8px;
+  margin: 8px 0px;
   font-weight: bold;
+}
+
+.copy-btn-container {
+  flex: 1 1 auto;
+  position: absolute;
+  right: 10px;
+  top: 7px;
+
+  .copy-btn {
+    font-size: 12px;
+    padding: 0px;
+    height: 20px;
+
+    :active {
+      color: darken(#388e3c, 5%);
+    }
+  }
+
+  .copy-success-message {
+    position: absolute;
+    top: 20px;
+    right: 0px;
+    background-color: rgb(222, 226, 230);
+    min-width: max-content;
+    padding: 5px;
+    border-radius: 3px;
+
+    .copy-success-icon {
+      color: #aaa;
+    }
+
+    &.visible {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity 0.25s linear;
+    }
+
+    &.hidden {
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s 0.25s, opacity 0.25s linear;
+    }
+  }
 }

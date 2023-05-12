@@ -1,4 +1,6 @@
 polarity.export = PolarityComponent.extend({
+  uniqueIdPrefix: '',
+  showCopyMessage: false,
   details: Ember.computed.alias('block.data.details'),
   timezone: Ember.computed('Intl', function () {
     return Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -11,11 +13,27 @@ polarity.export = PolarityComponent.extend({
   }),
   init() {
     this._super(...arguments);
+    let array = new Uint32Array(5);
+    this.set('uniqueIdPrefix', window.crypto.getRandomValues(array).join(''));
     this.getVulnerabilitySeverityClass();
   },
   actions: {
     toggleVulnerabilityDetails() {
       this.toggleProperty('showVulnerabilityDetails');
+    },
+    copyData: function () {
+      const savedSettings = {
+        showVulnerabilityDetails: this.get('showVulnerabilityDetails'),
+      };
+      this.set('showVulnerabilityDetails', true);
+      Ember.run.scheduleOnce(
+          'afterRender',
+          this,
+          this.copyElementToClipboard,
+          `tenableio-container-${this.get('uniqueIdPrefix')}`
+      );
+
+      Ember.run.scheduleOnce('destroy', this, this.restoreCopyState, savedSettings);
     }
   },
   getVulnerabilitySeverityClass() {
@@ -55,5 +73,24 @@ polarity.export = PolarityComponent.extend({
     }, {});
 
     this.set('severityPercentages', severityPercentages);
+  },
+  copyElementToClipboard (element) {
+    window.getSelection().removeAllRanges();
+    let range = document.createRange();
+
+    range.selectNode(typeof element === 'string' ? document.getElementById(element) : element);
+    window.getSelection().addRange(range);
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+  },
+  restoreCopyState (savedSettings) {
+    this.set('showVulnerabilityDetails', savedSettings.showVulnerabilityDetails);
+    this.set('showCopyMessage', true);
+
+    setTimeout(() => {
+      if (!this.isDestroyed) {
+        this.set('showCopyMessage', false);
+      }
+    }, 2000);
   }
 });
