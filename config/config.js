@@ -2,8 +2,8 @@ module.exports = {
   name: 'Tenable.io',
   acronym: 'TEN',
   description:
-    'Tenable.io is a cloud-based vulnerability management platform that helps organizations identify and remediate vulnerabilities across their IT infrastructure.',
-  entityTypes: ['ip', 'ipv4', 'ipv6', 'domain'],
+    'Search for assets in Tenable.io by IP Address or Domain and view vulnerability information.',
+  entityTypes: ['ipv4', 'ipv6', 'domain'],
   styles: ['./styles/styles.less'],
   defaultColor: 'light-blue',
   block: {
