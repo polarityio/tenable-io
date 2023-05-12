@@ -1,36 +1,36 @@
 {{#if details}}
-  <div class='tenable-link'>
+  <div class="tenable-link">
     <a
-      class='p-link'
-      href='{{block.userOptions.url}}/tio/app.html#/assets-uw/hosts-assets/details/{{asset.id}}/findings'
+      class="p-link"
+      href="https://cloud.tenable.com/tio/app.html#/assets-uw/hosts-assets/details/{{asset.id}}/findings"
     >View in Tenable.io
-      {{fa-icon 'external-link-square' fixedWidth=true class='external-link'}}</a>
+      {{fa-icon icon="external-link-square" fixedWidth=true class="external-link"}}</a>
   </div>
-  <div class='asset-info'>
-    <h1 class='p-title'>{{fa-icon icon='info-square'}} Asset Information: </h1>
+  <div class="asset-info">
+    <h1 class="p-title">{{fa-icon icon="info-square"}} Asset Information</h1>
     {{#if asset.last_seen}}
       <div>
-        <span class='p-key'>Last Seen: :</span>
-        <span class='p-value'>{{moment-format asset.last_seen timeZone=timezone}}</span>
+        <span class="p-key">Last Seen: :</span>
+        <span class="p-value">{{moment-format asset.last_seen timeZone=timezone}}</span>
       </div>
     {{/if}}
     {{#if asset.last_scan_target}}
       <div>
-        <span class='p-key'>Last Scan Target:</span>
-        <span class='p-value'>{{asset.last_scan_target}}</span>
+        <span class="p-key">Last Scan Target:</span>
+        <span class="p-value">{{asset.last_scan_target}}</span>
       </div>
     {{/if}}
     {{#each asset.sources as |source|}}
       {{#if source.name}}
         <div>
-          <span class='p-key'>Name:</span>
-          <span class='p-value'>{{source.name}}</span>
+          <span class="p-key">Name:</span>
+          <span class="p-value">{{source.name}}</span>
         </div>
       {{/if}}
       {{#if source.first_seen}}
         <div>
-          <span class='p-key'>First Seen:</span>
-          <span class='p-value'>{{moment-format
+          <span class="p-key">First Seen:</span>
+          <span class="p-value">{{moment-format
               source.first_seen
               timeZone=timezone
             }}</span>
@@ -40,113 +40,113 @@
     {{#each asset.operating_system as |os|}}
       {{#if os}}
         <div>
-          <span class='p-key'>Operating System:</span>
-          <span class='p-value'>{{os}}</span>
+          <span class="p-key">Operating System:</span>
+          <span class="p-value">{{os}}</span>
         </div>
       {{/if}}
     {{/each}}
     {{#each asset.fqdn as |fqdn|}}
       {{#if fqdn}}
         <div>
-          <span class='p-key'>FQDN:</span>
-          <span class='p-value'>{{fqdn}}</span>
+          <span class="p-key">FQDN:</span>
+          <span class="p-value">{{fqdn}}</span>
         </div>
       {{/if}}
     {{/each}}
     {{#each asset.hostname as |host|}}
       {{#if host}}
         <div>
-          <span class='p-key'>Hostname:</span>
-          <span class='p-value'>{{host}}</span>
+          <span class="p-key">Hostname:</span>
+          <span class="p-value">{{host}}</span>
         </div>
       {{/if}}
     {{/each}}
   </div>
-  <h1 class='p-title'>{{fa-icon icon='bullseye'}} Vulnerability Summary: </h1>
-  <div class='severity-levels'>
+  <h1 class="p-title">{{fa-icon icon="bullseye"}} Vulnerability Summary</h1>
+  <div class="severity-levels">
     <ul>
-      <li><span class='critical'>{{severityPercentages.critical.count}}</span>
+      <li><span class="critical">{{severityPercentages.critical.count}}</span>
         Critical:
         <span>{{severityPercentages.critical.percent}}%</span></li>
-      <li><span class='high'>{{severityPercentages.high.count}}</span>
+      <li><span class="high">{{severityPercentages.high.count}}</span>
         High:
         <span>{{severityPercentages.high.percent}}%</span></li>
-      <li><span class='medium'>{{severityPercentages.medium.count}}</span>
+      <li><span class="medium">{{severityPercentages.medium.count}}</span>
         Medium:
         <span>{{severityPercentages.medium.percent}}%</span></li>
-      <li><span class='low'>{{severityPercentages.low.count}}</span>
+      <li><span class="low">{{severityPercentages.low.count}}</span>
         Low:
         <span>{{severityPercentages.low.percent}}%</span></li>
-      <li><span class='info'>{{severityPercentages.info.count}}</span>
+      <li><span class="info">{{severityPercentages.info.count}}</span>
         Info:
         <span>{{severityPercentages.info.percent}}%</span></li>
     </ul>
   </div>
 
-  <div class='toggle-header'>
-    <span class='p-action' {{action 'toggleVulnerabilityDetails'}}>
+  <div class="toggle-header">
+    <span class="p-action" {{action "toggleVulnerabilityDetails"}}>
       Show Vulnerability Details
-      {{fa-icon (if showVulnerabilityDetails 'caret-up' 'caret-down') fixedWidth=true}}
+      {{fa-icon (if showVulnerabilityDetails "caret-up" "caret-down") fixedWidth=true}}
     </span>
   </div>
 
   {{#if showVulnerabilityDetails}}
-    <div class='vulnerability-info'>
-      <div class='scrollable-block'>
+    <div class="vulnerability-info">
+      <div class="scrollable-block">
         {{#each vulnerabilities.vulnerabilities as |result|}}
-          <div class='vulnerability-container'>
+          <div class="vulnerability-container">
             {{#if result.plugin_id}}
               <div>
-                <span class='p-key'>Plugin ID:</span>
-                <span class='p-value'>{{result.plugin_id}}</span>
+                <span class="p-key">Plugin ID:</span>
+                <span class="p-value">{{result.plugin_id}}</span>
               </div>
             {{/if}}
             {{#if result.count}}
               <div>
-                <span class='p-key'>Count:</span>
-                <span class='p-value'>{{result.count}}</span>
+                <span class="p-key">Count:</span>
+                <span class="p-value">{{result.count}}</span>
               </div>
             {{/if}}
             {{#if result.plugin_family}}
               <div>
-                <span class='p-key'>Plugin Family:</span>
-                <span class='p-value'>{{result.plugin_family}}</span>
+                <span class="p-key">Plugin Family:</span>
+                <span class="p-value">{{result.plugin_family}}</span>
               </div>
             {{/if}}
             {{#if result.plugin_name}}
               <div>
-                <span class='p-key'>Plugin Name:</span>
-                <span class='p-value'>{{result.plugin_name}}</span>
+                <span class="p-key">Plugin Name:</span>
+                <span class="p-value">{{result.plugin_name}}</span>
               </div>
             {{/if}}
             {{#if result.vulnerability_state}}
               <div>
-                <span class='p-key'>Vulnerability State:</span>
-                <span class='p-value'>{{result.vulnerability_state}}</span>
+                <span class="p-key">Vulnerability State:</span>
+                <span class="p-value">{{result.vulnerability_state}}</span>
               </div>
             {{/if}}
             {{#if result.accepted_count}}
               <div>
-                <span class='p-key'>Accepted Count:</span>
-                <span class='p-value'>{{result.accepted_count}}</span>
+                <span class="p-key">Accepted Count:</span>
+                <span class="p-value">{{result.accepted_count}}</span>
               </div>
             {{/if}}
             {{#if result.recasted_count}}
               <div>
-                <span class='p-key'>Recasted Count:</span>
-                <span class='p-value'>{{result.recasted_count}}</span>
+                <span class="p-key">Recasted Count:</span>
+                <span class="p-value">{{result.recasted_count}}</span>
               </div>
             {{/if}}
             {{#if result.cvss_base_score}}
               <div>
-                <span class='p-key'>CVSS Base Score:</span>
-                <span class='p-value'>{{result.cvss_base_score}}</span>
+                <span class="p-key">CVSS Base Score:</span>
+                <span class="p-value">{{result.cvss_base_score}}</span>
               </div>
             {{/if}}
             {{#if result.severity}}
               <div>
-                <span class='p-key'>Severity:</span>
-                <span class='p-value'>{{result.severity}}</span>
+                <span class="p-key">Severity:</span>
+                <span class="p-value">{{result.severity}}</span>
               </div>
             {{/if}}
           </div>
