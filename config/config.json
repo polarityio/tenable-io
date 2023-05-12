@@ -37,7 +37,7 @@
     {
       "key": "accessKey",
       "name": "Access Key",
-      "description": "The Tenable io access key generated in Tenable io user dashboard. https://docs.tenable.com/tenableio/Content/Platform/Settings/MyAccount/GenerateAPIKey.htm",
+      "description": "The Tenable io access key generated in Tenable io user dashboard.",
       "default": "",
       "type": "password",
       "userCanEdit": false,

@@ -18,6 +18,10 @@ Your Tenable-io Access Key. The access key can be found by logging into Tenable.
 
 Your tenable-io Secret Key. The secret key can be found by logging into Tenable.io and navigating to Settings -> My Account -> API Keys.
 
+For more information on Access Keys please see:
+
+For more information see https://docs.tenable.com/tenableio/Content/Platform/Settings/MyAccount/GenerateAPIKey.htm
+
 ## Installation Instructions
 
 Installation instructions for integrations are provided on the [PolarityIO GitHub Page](https://polarityio.github.io/).

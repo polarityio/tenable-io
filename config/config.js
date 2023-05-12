@@ -30,7 +30,7 @@ module.exports = {
       key: 'accessKey',
       name: 'Access Key',
       description:
-        'The Tenable.io access key generated in Tenable io user dashboard. For more information see https://docs.tenable.com/tenableio/Content/Platform/Settings/MyAccount/GenerateAPIKey.htm',
+        'The Tenable.io access key generated in Tenable io user dashboard.',
       default: '',
       type: 'password',
       userCanEdit: false,
