@@ -1,19 +1,118 @@
 .vulnerability-container {
-  margin: 10px 0;
+  margin-top: 10px;
+
+  &:first-child {
+    margin-top: 0px;
+  }
 }
 
-.vulnerability-container > div > span {
-  display: inline-block;
-  font-weight: bold;
-  margin-right: 5px;
-}
-
-.vulnerability-container > div > span:last-child {
-  margin-right: 0;
-  font-weight: normal;
+.p-block {
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .asset-info {
-  margin-top: 30px;
+  margin-top: 10px;
   margin-bottom: 12px;
+}
+
+.scrollable-block {
+  overflow-y: auto;
+  max-height: 300px;
+  width: 100%;
+  border: 1px solid #dee2e6;
+  padding: 5px;
+}
+
+.external-link {
+  font-size: 8px;
+  margin-bottom: 1px;
+}
+
+.severity-levels ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.severity-levels li {
+  line-height: 1.2em;
+}
+
+.severity-levels li span {
+  color: #888; /* Light gray color for percentage */
+}
+
+/* Colors the count according to severity level */
+.severity-levels .critical {
+  color: darkred;
+  font-weight: bold;
+}
+
+.severity-levels .high {
+  color: red;
+  font-weight: bold;
+}
+
+.severity-levels .medium {
+  color: orange;
+  font-weight: bold;
+}
+
+.severity-levels .low {
+  color: lightblue;
+  font-weight: bold;
+}
+
+.severity-levels .info {
+  color: blue;
+  font-weight: bold;
+}
+
+.toggle-header {
+  margin: 8px 0px;
+  font-weight: bold;
+}
+
+.copy-btn-container {
+  flex: 1 1 auto;
+  position: absolute;
+  right: 10px;
+  top: 7px;
+
+  .copy-btn {
+    font-size: 12px;
+    padding: 0px;
+    height: 20px;
+
+    :active {
+      color: darken(#388e3c, 5%);
+    }
+  }
+
+  .copy-success-message {
+    position: absolute;
+    top: 20px;
+    right: 0px;
+    background-color: rgb(222, 226, 230);
+    min-width: max-content;
+    padding: 5px;
+    border-radius: 3px;
+
+    .copy-success-icon {
+      color: #aaa;
+    }
+
+    &.visible {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity 0.25s linear;
+    }
+
+    &.hidden {
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s 0.25s, opacity 0.25s linear;
+    }
+  }
 }
