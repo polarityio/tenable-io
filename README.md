@@ -1,18 +1,14 @@
 # Polarity Tenable IO Integration
 
-![image](https://img.shields.io/badge/status-beta-green.svg)
-
 Tenable.io is a cloud-based vulnerability management platform that helps organizations identify and remediate vulnerabilities across their IT infrastructure, using a range of data sources and reporting capabilities to provide a comprehensive view of their security posture.
 
-The Polarity Tenable.io integration allows users to search for assets and associated vulnerabilities. Assets can be searched using IP address, hostname, or CVEs.
+The Polarity Tenable.io integration allows users to search for assets and associated vulnerabilities. Assets can be searched by IP or domain.
 
 To learn more about Tenable IO, visit the [official website](www.tenable.com).
 
+<img src="./assets/overlay.png" width="50%">
+
 ## Tenable IO Integration Options
-
-### Tenable IO URL
-
-Your Tenable-io URL including schema (i.e., https://).
 
 ### Access Key
 
