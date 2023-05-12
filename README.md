@@ -4,7 +4,7 @@ Tenable.io is a cloud-based vulnerability management platform that helps organiz
 
 The Polarity Tenable.io integration allows users to search for assets and associated vulnerabilities. Assets can be searched by IP or domain.
 
-To learn more about Tenable IO, visit the [official website](www.tenable.com).
+To learn more about Tenable IO, visit the [official website](https://www.tenable.com).
 
 <img src="./images/overlay.png" width="50%">
 
