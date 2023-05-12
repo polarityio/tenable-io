@@ -5,7 +5,6 @@ const polarityResult = require('./src/create-result-object');
 const { parseErrorToReadableJSON } = require('./src/errors');
 const { getLogger, setLogger } = require('./src/logger');
 const getAssets = require('./src/getAssets');
-const { map } = require('lodash/fp');
 
 let Logger = null;
 
@@ -26,9 +25,8 @@ async function doLookup(entities, options, cb) {
 
   try {
     const results = await getAssets(entities);
-    Logger.trace({ results }, 'results-aaaa');
 
-    const lookupResults = polarityResult.createResultsObject(results);
+    const lookupResults = polarityResult.buildResults(results);
 
     Logger.trace({ lookupResults }, 'lookup results');
     cb(null, lookupResults);
@@ -41,15 +39,7 @@ async function doLookup(entities, options, cb) {
 
 function validateOptions(userOptions, cb) {
   const errors = [];
-  if (
-    typeof userOptions.url.value !== 'string' ||
-    (typeof userOptions.url.value === 'string' && userOptions.url.value.length === 0)
-  ) {
-    errors.push({
-      key: 'url',
-      message: 'You must provide a URL.'
-    });
-  }
+
   if (
     typeof userOptions.accessKey.value !== 'string' ||
     (typeof userOptions.accessKey.value === 'string' &&

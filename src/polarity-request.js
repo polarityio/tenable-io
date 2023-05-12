@@ -5,7 +5,7 @@ const { NetworkError, ApiRequestError, AuthRequestError } = require('./errors');
 const {
   request: { ca, cert, key, passphrase, rejectUnauthorized, proxy }
 } = require('../config/config.js');
-const { map } = require('lodash/fp');
+const { map, get } = require('lodash/fp');
 const { parallelLimit } = require('async');
 
 const _configFieldIsValid = (field) => typeof field === 'string' && field.length > 0;
@@ -80,7 +80,7 @@ class PolarityRequest {
 
     const requestOptionsObj = {
       method: reqOpts.method,
-      url: this.options.url + reqOpts.path,
+      url: `https://cloud.tenable.com${reqOpts.path}`,
       headers: this.headers,
       ...reqOpts
     };
@@ -91,7 +91,20 @@ class PolarityRequest {
     return new Promise((resolve, reject) => {
       this.requestWithDefaults(requestOptions, async (err, response) => {
         Logger.trace({ err, response }, 'Request Response');
-        const statusCode = response.statusCode;
+
+        if (err) {
+          return reject(
+            new NetworkError(
+              `Network Error: The server you are trying to connect to is unavailable Check your Tenant URL in the Polarity user options.`,
+              {
+                requestOptions
+              }
+            )
+          );
+        }
+
+        // const statusCode = get(response.statusCode;
+        const statusCode = get('statusCode', response);
 
         if (
           statusCode === HTTP_CODE_SUCCESS_200 ||

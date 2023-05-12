@@ -1,9 +1,10 @@
-const { map } = require('lodash/fp');
+const { map, get, size } = require('lodash/fp');
 const { polarityRequest } = require('./polarity-request');
 const { getLogger } = require('./logger');
 
 async function getAssets(entities) {
   const Logger = getLogger();
+  let vulnerabilities = [];
 
   const requestOptions = map(
     (entity) => ({
@@ -13,16 +14,15 @@ async function getAssets(entities) {
     }),
     entities
   );
-  Logger.trace({ requestOptions }, 'Query Request Options');
 
   const response = await polarityRequest.send(requestOptions);
-  Logger.trace({ response }, 'Query Response');
 
-  const asset = response[0].result.body.assets[0];
-  const entity = response[0].entity;
+  const asset = get('0.result.body.assets.0', response) || [];
+  const entity = get('0.entity', response) || [];
 
-  const vulnerabilities = await getVulnerabilitiesForAsset(asset, entity);
-  Logger.trace({ vulnerabilities }, 'Vulnerabilities');
+  if (size(asset) > 0) {
+    vulnerabilities = await getVulnerabilitiesForAsset(asset);
+  }
 
   return {
     entity,
@@ -32,10 +32,6 @@ async function getAssets(entities) {
 }
 
 async function getVulnerabilitiesForAsset(asset) {
-  const Logger = getLogger();
-
-  Logger.trace({ asset }, 'getVulnerabilitiesForAsset asset');
-
   const queryRequestOptions = {
     method: 'GET',
     path: `/workbenches/assets/${asset.id}/vulnerabilities`
@@ -44,9 +40,10 @@ async function getVulnerabilitiesForAsset(asset) {
   const assetsWithVulnerabilities = await polarityRequest.send(queryRequestOptions);
 
   return {
-    vulnerabilities: assetsWithVulnerabilities[0].result.body.vulnerabilities,
+    vulnerabilities:
+      get('0.result.body.vulnerabilities', assetsWithVulnerabilities) || [],
     total_vulnerability_count:
-      assetsWithVulnerabilities[0].result.body.total_vulnerability_count
+      get('0.result.body.total_vulnerability_count', assetsWithVulnerabilities) || 0
   };
 }
 
