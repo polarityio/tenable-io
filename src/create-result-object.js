@@ -1,3 +1,4 @@
+const { size } = require('lodash/fp');
 const { getLogger } = require('./logger');
 /**
  * Return a Result Object or a Result Miss Object based on the REST API response.
@@ -18,10 +19,20 @@ class PolarityResult {
     };
   }
 
-  createResultsObject(apiResponse) {
+  buildResults(apiResponse) {
     const Logger = getLogger();
-    Logger.trace({ apiResponse }, 'createResultObject arguments');
 
+    Logger.trace({ apiResponse }, 'buildResults arguments');
+
+    if (size(apiResponse.asset) === 0) {
+      return this.createNoResultsObject(apiResponse);
+    } else {
+      Logger.trace({ apiResponse }, 'buildResults arguments');
+      return this.createResultsObject(apiResponse);
+    }
+  }
+
+  createResultsObject(apiResponse) {
     const total_vulnerability_count =
       apiResponse.vulnerabilities.total_vulnerability_count;
 
@@ -36,11 +47,13 @@ class PolarityResult {
     ];
   }
 
-  createNoResultsObject() {
-    return {
-      entity: this.entity,
-      data: null
-    };
+  createNoResultsObject(apiResponse) {
+    return [
+      {
+        entity: apiResponse.entity,
+        data: null
+      }
+    ];
   }
 }
 
