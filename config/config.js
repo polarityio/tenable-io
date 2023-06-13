@@ -3,7 +3,7 @@ module.exports = {
   acronym: 'TEN',
   description:
     'Search for assets in Tenable.io by IP Address or Domain and view vulnerability information.',
-  entityTypes: ['ipv4', 'ipv6', 'domain'],
+  entityTypes: ['IPv4', 'IPv6', 'domain'],
   styles: ['./styles/styles.less'],
   defaultColor: 'light-blue',
   block: {
