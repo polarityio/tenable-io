@@ -2,21 +2,10 @@ const fs = require('fs');
 const request = require('postman-request');
 const { getLogger } = require('./logger');
 const { NetworkError, ApiRequestError, AuthRequestError } = require('./errors');
-const {
-  request: { ca, cert, key, passphrase, rejectUnauthorized, proxy }
-} = require('../config/config.js');
 const { map, get } = require('lodash/fp');
 const { parallelLimit } = require('async');
 
-const _configFieldIsValid = (field) => typeof field === 'string' && field.length > 0;
-
 const defaults = {
-  ...(_configFieldIsValid(ca) && { ca: fs.readFileSync(ca) }),
-  ...(_configFieldIsValid(cert) && { cert: fs.readFileSync(cert) }),
-  ...(_configFieldIsValid(key) && { key: fs.readFileSync }),
-  ...(_configFieldIsValid(passphrase) && { passphrase }),
-  ...(_configFieldIsValid(proxy) && { proxy }),
-  ...(typeof rejectUnauthorized === 'boolean' && { rejectUnauthorized }),
   json: true
 };
 
