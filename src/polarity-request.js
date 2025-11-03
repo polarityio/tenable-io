@@ -59,11 +59,9 @@ class PolarityRequest {
   setOptions(options) {
     this.options = options;
 
-    if (options.url) {
-      // Make sure the url does not end with a trailing slash
-      // so that we can consistently handle it further
-      this.options.url = options.url.endsWith('/') ? options.url.slice(0, -1) : options.url;
-    }
+    // Make sure the url does not end with a trailing slash
+    // so that we can consistently handle it further
+    this.options.url = options.url.endsWith('/') ? options.url.slice(0, -1) : options.url;
   }
   /**
    * Makes a request network request using postman-request.  If the request is an array, it will run the requests in parallel.
