@@ -2,21 +2,10 @@ const fs = require('fs');
 const request = require('postman-request');
 const { getLogger } = require('./logger');
 const { NetworkError, ApiRequestError, AuthRequestError } = require('./errors');
-const {
-  request: { ca, cert, key, passphrase, rejectUnauthorized, proxy }
-} = require('../config/config.js');
 const { map, get } = require('lodash/fp');
 const { parallelLimit } = require('async');
 
-const _configFieldIsValid = (field) => typeof field === 'string' && field.length > 0;
-
 const defaults = {
-  ...(_configFieldIsValid(ca) && { ca: fs.readFileSync(ca) }),
-  ...(_configFieldIsValid(cert) && { cert: fs.readFileSync(cert) }),
-  ...(_configFieldIsValid(key) && { key: fs.readFileSync }),
-  ...(_configFieldIsValid(passphrase) && { passphrase }),
-  ...(_configFieldIsValid(proxy) && { proxy }),
-  ...(typeof rejectUnauthorized === 'boolean' && { rejectUnauthorized }),
   json: true
 };
 
@@ -69,6 +58,10 @@ class PolarityRequest {
 
   setOptions(options) {
     this.options = options;
+
+    // Make sure the url does not end with a trailing slash
+    // so that we can consistently handle it further
+    this.options.url = options.url.endsWith('/') ? options.url.slice(0, -1) : options.url;
   }
   /**
    * Makes a request network request using postman-request.  If the request is an array, it will run the requests in parallel.
@@ -80,7 +73,7 @@ class PolarityRequest {
 
     const requestOptionsObj = {
       method: reqOpts.method,
-      url: `https://cloud.tenable.com${reqOpts.path}`,
+      url: `${this.options.url}${reqOpts.path}`,
       headers: this.headers,
       ...reqOpts
     };

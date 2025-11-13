@@ -33,3 +33,13 @@ test-runner.js
 ~
 .polarity.conf
 test.js
+
+#Ignore VSCode 
+*.history
+.histoy
+*.vscode
+.vscode
+
+#Other
+legacy_wrapper.js
+.DS_Store
