@@ -78,7 +78,7 @@
   <div class="severity-levels">
     <ul>
       <li>
-        <label class="severity-filter-row" style="display:inline-flex; align-items:center; gap:6px; padding:2px 0; cursor:pointer; margin-right:8px;">
+        <label class="severity-filter-row">
           {{input type="checkbox" checked=(get severityFilters "critical") change=(action "toggleSeverityFilter" "critical")}}
           <span class="critical">{{severityPercentages.critical.count}}</span>
           <span class="severity-label">Critical:</span>
@@ -86,7 +86,7 @@
         </label>
       </li>
       <li>
-        <label class="severity-filter-row" style="display:inline-flex; align-items:center; gap:6px; padding:2px 0; cursor:pointer; margin-right:8px;">
+        <label class="severity-filter-row">
           {{input type="checkbox" checked=(get severityFilters "high") change=(action "toggleSeverityFilter" "high")}}
           <span class="high">{{severityPercentages.high.count}}</span>
           <span class="severity-label">High:</span>
@@ -94,7 +94,7 @@
         </label>
       </li>
       <li>
-        <label class="severity-filter-row" style="display:inline-flex; align-items:center; gap:6px; padding:2px 0; cursor:pointer; margin-right:8px;">
+        <label class="severity-filter-row">
           {{input type="checkbox" checked=(get severityFilters "medium") change=(action "toggleSeverityFilter" "medium")}}
           <span class="medium">{{severityPercentages.medium.count}}</span>
           <span class="severity-label">Medium:</span>
@@ -102,7 +102,7 @@
         </label>
       </li>
       <li>
-        <label class="severity-filter-row" style="display:inline-flex; align-items:center; gap:6px; padding:2px 0; cursor:pointer; margin-right:8px;">
+        <label class="severity-filter-row">
           {{input type="checkbox" checked=(get severityFilters "low") change=(action "toggleSeverityFilter" "low")}}
           <span class="low">{{severityPercentages.low.count}}</span>
           <span class="severity-label">Low:</span>
@@ -110,7 +110,7 @@
         </label>
       </li>
       <li>
-        <label class="severity-filter-row" style="display:inline-flex; align-items:center; gap:6px; padding:2px 0; cursor:pointer; margin-right:8px;">
+        <label class="severity-filter-row">
           {{input type="checkbox" checked=(get severityFilters "info") change=(action "toggleSeverityFilter" "info")}}
           <span class="info">{{severityPercentages.info.count}}</span>
           <span class="severity-label">Info:</span>
