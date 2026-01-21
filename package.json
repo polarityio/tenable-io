@@ -8,9 +8,6 @@
   "dependencies": {
     "async": "^3.2.6",
     "lodash": "^4.17.21",
-    "postman-request": "^2.88.1-postman.47"
-  },
-  "overrides": {
-    "qs": "^6.14.1"
+    "postman-request": "^2.88.1-postman.48"
   }
 }
