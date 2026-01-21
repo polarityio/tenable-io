@@ -57,6 +57,45 @@
       "type": "password",
       "userCanEdit": false,
       "adminOnly": true
+    },
+    {
+      "key": "minVulnerabilitySeverity",
+      "name": "Minimum Severity (Asset Filter)",
+      "description": "Only return assets that have at least one vulnerability at or above this severity.",
+      "type": "select",
+      "default": {
+        "value": "none",
+        "display": "None"
+      },
+      "options": [
+        {
+          "value": "critical",
+          "display": "Critical"
+        },
+        {
+          "value": "high",
+          "display": "High"
+        },
+        {
+          "value": "medium",
+          "display": "Medium"
+        },
+        {
+          "value": "low",
+          "display": "Low"
+        },
+        {
+          "value": "informational",
+          "display": "Informational"
+        },
+        {
+          "value": "none",
+          "display": "None"
+        }
+      ],
+      "multiple": false,
+      "userCanEdit": true,
+      "adminOnly": false
     }
   ]
 }
