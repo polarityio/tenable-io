@@ -77,22 +77,50 @@
   <h1 class="p-title">{{fa-icon icon="bullseye"}} Vulnerability Summary</h1>
   <div class="severity-levels">
     <ul>
-      <li><span class="critical">{{severityPercentages.critical.count}}</span>
-        Critical:
-        <span>{{severityPercentages.critical.percent}}%</span></li>
-      <li><span class="high">{{severityPercentages.high.count}}</span>
-        High:
-        <span>{{severityPercentages.high.percent}}%</span></li>
-      <li><span class="medium">{{severityPercentages.medium.count}}</span>
-        Medium:
-        <span>{{severityPercentages.medium.percent}}%</span></li>
-      <li><span class="low">{{severityPercentages.low.count}}</span>
-        Low:
-        <span>{{severityPercentages.low.percent}}%</span></li>
-      <li><span class="info">{{severityPercentages.info.count}}</span>
-        Info:
-        <span>{{severityPercentages.info.percent}}%</span></li>
+      <li>
+        <label class="severity-filter-row" style="display:inline-flex; align-items:center; gap:6px; padding:2px 0; cursor:pointer; margin-right:8px;">
+          {{input type="checkbox" checked=(get severityFilters "critical") change=(action "toggleSeverityFilter" "critical")}}
+          <span class="critical">{{severityPercentages.critical.count}}</span>
+          <span class="severity-label">Critical:</span>
+          <span>{{severityPercentages.critical.percent}}%</span>
+        </label>
+      </li>
+      <li>
+        <label class="severity-filter-row" style="display:inline-flex; align-items:center; gap:6px; padding:2px 0; cursor:pointer; margin-right:8px;">
+          {{input type="checkbox" checked=(get severityFilters "high") change=(action "toggleSeverityFilter" "high")}}
+          <span class="high">{{severityPercentages.high.count}}</span>
+          <span class="severity-label">High:</span>
+          <span>{{severityPercentages.high.percent}}%</span>
+        </label>
+      </li>
+      <li>
+        <label class="severity-filter-row" style="display:inline-flex; align-items:center; gap:6px; padding:2px 0; cursor:pointer; margin-right:8px;">
+          {{input type="checkbox" checked=(get severityFilters "medium") change=(action "toggleSeverityFilter" "medium")}}
+          <span class="medium">{{severityPercentages.medium.count}}</span>
+          <span class="severity-label">Medium:</span>
+          <span>{{severityPercentages.medium.percent}}%</span>
+        </label>
+      </li>
+      <li>
+        <label class="severity-filter-row" style="display:inline-flex; align-items:center; gap:6px; padding:2px 0; cursor:pointer; margin-right:8px;">
+          {{input type="checkbox" checked=(get severityFilters "low") change=(action "toggleSeverityFilter" "low")}}
+          <span class="low">{{severityPercentages.low.count}}</span>
+          <span class="severity-label">Low:</span>
+          <span>{{severityPercentages.low.percent}}%</span>
+        </label>
+      </li>
+      <li>
+        <label class="severity-filter-row" style="display:inline-flex; align-items:center; gap:6px; padding:2px 0; cursor:pointer; margin-right:8px;">
+          {{input type="checkbox" checked=(get severityFilters "info") change=(action "toggleSeverityFilter" "info")}}
+          <span class="info">{{severityPercentages.info.count}}</span>
+          <span class="severity-label">Info:</span>
+          <span>{{severityPercentages.info.percent}}%</span>
+        </label>
+      </li>
     </ul>
+  </div>
+  <div class="vuln-filter-message">
+    {{selectedSeverityMessage}}
   </div>
 
   <div class="toggle-header">
@@ -105,64 +133,80 @@
   {{#if showVulnerabilityDetails}}
     <div class="vulnerability-info">
       <div class="scrollable-block">
-        {{#each vulnerabilities.vulnerabilities as |result|}}
-          <div class="vulnerability-container">
-            {{#if result.plugin_id}}
-              <div>
-                <span class="p-key">Plugin ID:</span>
-                <span class="p-value">{{result.plugin_id}}</span>
-              </div>
-            {{/if}}
-            {{#if result.count}}
-              <div>
-                <span class="p-key">Count:</span>
-                <span class="p-value">{{result.count}}</span>
-              </div>
-            {{/if}}
-            {{#if result.plugin_family}}
-              <div>
-                <span class="p-key">Plugin Family:</span>
-                <span class="p-value">{{result.plugin_family}}</span>
-              </div>
-            {{/if}}
-            {{#if result.plugin_name}}
-              <div>
-                <span class="p-key">Plugin Name:</span>
-                <span class="p-block">{{result.plugin_name}}</span>
-              </div>
-            {{/if}}
-            {{#if result.vulnerability_state}}
-              <div>
-                <span class="p-key">Vulnerability State:</span>
-                <span class="p-value">{{result.vulnerability_state}}</span>
-              </div>
-            {{/if}}
-            {{#if result.accepted_count}}
-              <div>
-                <span class="p-key">Accepted Count:</span>
-                <span class="p-value">{{result.accepted_count}}</span>
-              </div>
-            {{/if}}
-            {{#if result.recasted_count}}
-              <div>
-                <span class="p-key">Recasted Count:</span>
-                <span class="p-value">{{result.recasted_count}}</span>
-              </div>
-            {{/if}}
-            {{#if result.cvss_base_score}}
-              <div>
-                <span class="p-key">CVSS Base Score:</span>
-                <span class="p-value">{{result.cvss_base_score}}</span>
-              </div>
-            {{/if}}
-            {{#if result.severity}}
-              <div>
-                <span class="p-key">Severity:</span>
-                <span class="p-value">{{result.severity}}</span>
-              </div>
-            {{/if}}
-          </div>
-        {{/each}}
+        {{#if filteredVulnerabilities.length }}
+          {{#each filteredVulnerabilities as |result|}}
+            <div class="vulnerability-container">
+              {{#if result.plugin_id}}
+                <div>
+                  <span class="p-key">Plugin ID:</span>
+                  <span class="p-value">{{result.plugin_id}}</span>
+                </div>
+              {{/if}}
+              {{#if result.count}}
+                <div>
+                  <span class="p-key">Count:</span>
+                  <span class="p-value">{{result.count}}</span>
+                </div>
+              {{/if}}
+              {{#if result.plugin_family}}
+                <div>
+                  <span class="p-key">Plugin Family:</span>
+                  <span class="p-value">{{result.plugin_family}}</span>
+                </div>
+              {{/if}}
+              {{#if result.plugin_name}}
+                <div>
+                  <span class="p-key">Plugin Name:</span>
+                  <span class="p-block">{{result.plugin_name}}</span>
+                </div>
+              {{/if}}
+              {{#if result.vulnerability_state}}
+                <div>
+                  <span class="p-key">Vulnerability State:</span>
+                  <span class="p-value">{{result.vulnerability_state}}</span>
+                </div>
+              {{/if}}
+              {{#if result.accepted_count}}
+                <div>
+                  <span class="p-key">Accepted Count:</span>
+                  <span class="p-value">{{result.accepted_count}}</span>
+                </div>
+              {{/if}}
+              {{#if result.recasted_count}}
+                <div>
+                  <span class="p-key">Recasted Count:</span>
+                  <span class="p-value">{{result.recasted_count}}</span>
+                </div>
+              {{/if}}
+              {{#if result.cvss_base_score}}
+                <div>
+                  <span class="p-key">CVSS Base Score:</span>
+                  <span class="p-value">{{result.cvss_base_score}}</span>
+                </div>
+              {{/if}}
+              {{#if result.severity}}
+                <div>
+                  <span class="p-key">Severity:</span>
+                  <span class="p-value">{{result.severity}}</span>
+                </div>
+              {{/if}}
+              {{#if result._severityLabelDisplay}}
+                <div class="severity-row">
+                  <span class="p-key">Criticality:</span>
+                  {{#if result._severityMeta}}
+                    <span class={{concat "severity-tag " result._severityMeta.className}}>
+                      {{result._severityMeta.label}}
+                    </span>
+                  {{else}}
+                    <span class="p-value">{{result._severityLabelDisplay}}</span>
+                  {{/if}}
+                </div>
+              {{/if}}
+            </div>
+          {{/each}}
+        {{else}}
+          <div class="p-block">No vulnerabilities match the selected severities.</div>
+        {{/if}}
       </div>
     </div>
   {{/if}}
