@@ -116,7 +116,7 @@ polarity.export = PolarityComponent.extend({
     const total = normalized.length;
     Object.keys(counts).forEach((key) => {
       counts[key].percent =
-        total > 0 ? ((counts[key].count / total) * 100).toFixed(2) : '0.00';
+        total > 0 ? Number(((counts[key].count / total) * 100).toFixed(2)) : 0;
     });
 
     return counts;
