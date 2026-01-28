@@ -6,7 +6,8 @@
   "entityTypes": [
     "IPv4",
     "IPv6",
-    "domain"
+    "domain",
+    "cve"
   ],
   "styles": [
     "./styles/styles.less"
