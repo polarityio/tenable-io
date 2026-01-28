@@ -60,12 +60,12 @@
     },
     {
       "key": "minVulnerabilitySeverity",
-      "name": "Minimum Severity (Asset Filter)",
-      "description": "Only return assets that have at least one vulnerability at or above this severity.",
+      "name": "Filter Assets by Vulnerability Severity",
+      "description": "Only return assets that have at least one vulnerability at or above the selected severity.  For example, if \"High\" is selected, only assets with a \"High\" or \"Critical\" vulnerability will be returned from searches. Defaults to \"No Filtering\".",
       "type": "select",
       "default": {
         "value": "none",
-        "display": "None"
+        "display": "No Filtering"
       },
       "options": [
         {
@@ -90,12 +90,12 @@
         },
         {
           "value": "none",
-          "display": "None"
+          "display": "No Filtering"
         }
       ],
       "multiple": false,
-      "userCanEdit": true,
-      "adminOnly": false
+      "userCanEdit": false,
+      "adminOnly": true
     }
   ]
 }

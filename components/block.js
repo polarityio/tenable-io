@@ -30,9 +30,7 @@ polarity.export = PolarityComponent.extend({
   timezone: Ember.computed('Intl', function () {
     return Intl.DateTimeFormat().resolvedOptions().timeZone;
   }),
-  vulnerabilities: Ember.computed('details.vulnerabilities', function () {
-    return this.get('details.vulnerabilities');
-  }),
+  vulnerabilities: Ember.computed.alias('details.vulnerabilities'),
   /**
    * Normalize severity label/class for a vulnerability entry.
    * Returns both the severity meta (for color/class) and the display label.
