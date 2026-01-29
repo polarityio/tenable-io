@@ -101,7 +101,7 @@ async function getAssets(entities, options = {}) {
 
     const response = await polarityRequest.send(req);
     const assets = get('0.result.body.assets', response) || [];
-    const asset = get('0', assets) || [];
+    const asset = get('0', assets) || {};
     const entity = get('entity', response) || req.entity;
 
     if (size(asset) > 0) {
@@ -114,7 +114,7 @@ async function getAssets(entities, options = {}) {
 
     return {
       entity,
-      asset: includeAsset ? asset : [],
+      asset: includeAsset ? asset : {},
       assets: includeAsset ? assets : [],
       isCveEntity: false,
       vulnerabilities: includeAsset
@@ -125,7 +125,7 @@ async function getAssets(entities, options = {}) {
 
   return {
     entity: entities[0],
-    asset: [],
+    asset: {},
     isCveEntity: false,
     vulnerabilities: { vulnerabilities: [], total_vulnerability_count: 0 }
   };
@@ -244,7 +244,7 @@ async function handleCveEntity(entity, options) {
     entity,
     asset,
     assets: resolvedAssets,
-      isCveEntity: true,
+    isCveEntity: true,
     vulnerabilities: { vulnerabilities: [], total_vulnerability_count },
     total_asset_count
   };

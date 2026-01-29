@@ -2,7 +2,7 @@
   "polarityIntegrationUuid": "a801d4e0-f10b-11ed-b578-7dac4b1703b9",
   "name": "Tenable.io",
   "acronym": "TEN",
-  "description": "Search for assets in Tenable.io by IP Address or Domain and view vulnerability information.",
+  "description": "Search for assets in Tenable.io by IP Address, Domain or CVE and view vulnerability information.",
   "entityTypes": [
     "IPv4",
     "IPv6",
