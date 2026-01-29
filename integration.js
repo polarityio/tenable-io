@@ -24,7 +24,7 @@ async function doLookup(entities, options, cb) {
   );
 
   try {
-    const results = await getAssets(entities);
+    const results = await getAssets(entities, options);
 
     const lookupResults = polarityResult.buildResults(results);
 
