@@ -4,7 +4,7 @@ const { polarityRequest } = require('./src/polarity-request');
 const polarityResult = require('./src/create-result-object');
 const { parseErrorToReadableJSON } = require('./src/errors');
 const { getLogger, setLogger } = require('./src/logger');
-const getAssets = require('./src/getAssets');
+const { getAssets, getVulnerabilitiesForAsset } = require('./src/getAssets');
 
 let Logger = null;
 
@@ -34,6 +34,50 @@ async function doLookup(entities, options, cb) {
     const errorAsPojo = parseErrorToReadableJSON(error);
     Logger.error({ error: errorAsPojo }, 'Error in doLookup');
     cb(errorAsPojo);
+  }
+}
+
+async function onMessage(payload, options, cb) {
+  const Logger = getLogger();
+  Logger.trace({ payload }, 'onMessage received');
+
+  polarityRequest.setOptions(options);
+  polarityRequest.setHeader(
+    'X-ApiKeys',
+    `accessKey=${options.accessKey};secretKey=${options.secretKey}`
+  );
+
+  switch (payload.action) {
+    case 'GET_ASSET_VULNERABILITIES':
+      if (!payload.assetId) {
+        return cb(null, {
+          error: {
+            detail: 'Missing assetId for vulnerability lookup'
+          }
+        });
+      }
+
+      try {
+        const vulnerabilities = await getVulnerabilitiesForAsset(payload.assetId);
+
+        return cb(null, {
+          data: vulnerabilities
+        });
+      } catch (error) {
+        const errorAsPojo = parseErrorToReadableJSON(error);
+        
+        Logger.error({ error: errorAsPojo }, 'Error fetching asset vulnerabilities');
+        return cb(null, {
+          error: errorAsPojo
+        });
+      }
+      break;
+    default:
+      return cb(null, {
+        error: {
+          detail: `Unsupported onMessage action '${payload.action}'`
+        }
+      });
   }
 }
 
@@ -80,5 +124,6 @@ function validateOptions(userOptions, cb) {
 module.exports = {
   startup,
   validateOptions,
-  doLookup
+  doLookup,
+  onMessage
 };
