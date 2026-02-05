@@ -1,0 +1,56 @@
+{
+  "root": {
+    "path": "",
+    "on_null": "return_empty"
+  },
+  "pipeline": [
+    {
+      "op": "copy",
+      "from": "asset.last_seen",
+      "to": "reduced_results.asset_last_seen"
+    },
+    {
+      "op": "copy",
+      "from": "asset.operating_system",
+      "to": "reduced_results.asset_operating_system"
+    },
+    {
+      "op": "copy",
+      "from": "asset.last_scan_target",
+      "to": "reduced_results.asset_last_scan_target"
+    },
+    {
+      "op": "copy",
+      "from": "asset.sources",
+      "to": "reduced_results.asset_sources"
+    },
+    {
+      "op": "aggregate",
+      "source": "vulnerabilities.vulnerabilities[]",
+      "group_by": "severity",
+      "aggregations": [
+        {
+          "function": "count",
+          "output": "count"
+        }
+      ],
+      "shape": {
+        "reduced_results.vulnerability_severity_counts": "$result"
+      }
+    },
+    {
+      "op": "transform",
+      "path": "reduced_results.vulnerability_severity_counts",
+      "function": "custom",
+      "expression": "$.reduce((acc, item) => { const level = {4:'critical',3:'high',2:'medium',1:'low',0:'info'}[item.severity] || 'unknown'; acc[level] = item; return acc; }, {})"
+    },
+    {
+      "op": "prune",
+      "strategy": "empty_values",
+      "target": "reduced_results"
+    }
+  ],
+  "output": {
+    "result": "$working.reduced_results"
+  }
+}
