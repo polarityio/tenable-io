@@ -1,0 +1,243 @@
+{
+  "entity": {
+    "value": "192.168.1.100",
+    "type": "IPv4"
+  },
+  "asset": {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "has_agent": true,
+    "has_plugin_results": true,
+    "created_at": "2023-01-15T10:30:00.000Z",
+    "terminated_at": null,
+    "terminated_by": null,
+    "updated_at": "2024-01-10T14:22:33.000Z",
+    "deleted_at": null,
+    "deleted_by": null,
+    "first_seen": "2023-01-15T10:30:00.000Z",
+    "last_seen": "2024-01-15T18:45:12.000Z",
+    "first_scan_time": "2023-01-16T08:00:00.000Z",
+    "last_scan_time": "2024-01-15T06:00:00.000Z",
+    "last_authenticated_scan_date": "2024-01-15T06:00:00.000Z",
+    "last_licensed_scan_date": "2024-01-15T06:00:00.000Z",
+    "last_scan_id": "scan-12345-67890",
+    "last_schedule_id": "template-schedule-001",
+    "azure_vm_id": null,
+    "azure_resource_id": null,
+    "gcp_project_id": null,
+    "gcp_zone": null,
+    "gcp_instance_id": null,
+    "aws_ec2_instance_ami_id": "ami-0abcdef1234567890",
+    "aws_ec2_instance_id": "i-0123456789abcdef0",
+    "aws_owner_id": "123456789012",
+    "aws_availability_zone": "us-east-1a",
+    "aws_region": "us-east-1",
+    "aws_vpc_id": "vpc-0a1b2c3d",
+    "aws_ec2_instance_group_name": "production-web-servers",
+    "aws_ec2_instance_state_name": "running",
+    "aws_ec2_instance_type": "t3.medium",
+    "aws_subnet_id": "subnet-0abc123",
+    "aws_ec2_product_code": [],
+    "aws_ec2_name": "prod-web-01",
+    "mcafee_epo_guid": null,
+    "mcafee_epo_agent_guid": null,
+    "servicenow_sysid": null,
+    "bigfix_asset_id": null,
+    "agent_uuid": "agent-uuid-abc-123",
+    "bios_uuid": "bios-uuid-def-456",
+    "network_id": [],
+    "network_name": [],
+    "hostname": [
+      "prod-web-01.example.com"
+    ],
+    "fqdn": [
+      "prod-web-01.example.com",
+      "web01.internal.example.com"
+    ],
+    "ipv4": [
+      "192.168.1.100",
+      "10.0.1.50"
+    ],
+    "ipv6": [],
+    "netbios_name": [
+      "PRODWEB01"
+    ],
+    "operating_system": [
+      "Linux Kernel 5.15.0 on Ubuntu 22.04"
+    ],
+    "system_type": [
+      "general-purpose"
+    ],
+    "tenable_uuid": [
+      "12345678-90ab-cdef-1234-567890abcdef"
+    ],
+    "mac_address": [
+      "00:11:22:33:44:55"
+    ],
+    "ssh_fingerprint": [
+      "SHA256:abcdefghijklmnopqrstuvwxyz1234567890ABCDEFG"
+    ],
+    "manufacturer_tpm_ids": [],
+    "installed_software": [
+      "cpe:/a:apache:http_server:2.4.52",
+      "cpe:/o:canonical:ubuntu_linux:22.04"
+    ],
+    "agent_names": [
+      "Tenable Agent - prod-web-01"
+    ],
+    "exposure_score": 752,
+    "last_scan_target": "192.168.1.0/24",
+    "sources": [
+      {
+        "name": "NESSUS_AGENT",
+        "first_seen": "2023-01-15T10:30:00.000Z",
+        "last_seen": "2024-01-15T18:45:12.000Z"
+      },
+      {
+        "name": "AWS",
+        "first_seen": "2023-01-15T11:00:00.000Z",
+        "last_seen": "2024-01-15T18:00:00.000Z"
+      }
+    ],
+    "tags": [
+      {
+        "tag_key": "Environment",
+        "tag_value": "Production",
+        "added_by": "user@example.com",
+        "added_at": "2023-02-01T09:00:00.000Z"
+      },
+      {
+        "tag_key": "Application",
+        "tag_value": "WebServer",
+        "added_by": "automation",
+        "added_at": "2023-02-01T09:00:00.000Z"
+      }
+    ],
+    "acr_score": 8,
+    "acr_drivers": [
+      {
+        "driver_name": "critical_vulnerabilities",
+        "driver_value": 3,
+        "driver_weight": 0.4
+      }
+    ]
+  },
+  "vulnerabilities": {
+    "vulnerabilities": [
+      {
+        "count": 2,
+        "plugin_family": "Web Servers",
+        "plugin_id": 51192,
+        "plugin_name": "SSL Certificate Cannot Be Trusted",
+        "vulnerability_state": "Open",
+        "accepted_count": 0,
+        "recasted_count": 0,
+        "counts_by_severity": [
+          {
+            "count": 2,
+            "value": 2
+          }
+        ],
+        "severity": 2,
+        "vpr": {
+          "score": 5.9,
+          "drivers": {
+            "age_of_vuln": {
+              "lower_bound": 730,
+              "upper_bound": 0
+            }
+          }
+        }
+      },
+      {
+        "count": 1,
+        "plugin_family": "Misc.",
+        "plugin_id": 11936,
+        "plugin_name": "OS Identification",
+        "vulnerability_state": "Open",
+        "accepted_count": 0,
+        "recasted_count": 0,
+        "counts_by_severity": [
+          {
+            "count": 1,
+            "value": 0
+          }
+        ],
+        "severity": 0
+      },
+      {
+        "count": 3,
+        "plugin_family": "Ubuntu Local Security Checks",
+        "plugin_id": 162917,
+        "plugin_name": "Ubuntu 22.04 LTS : Linux kernel vulnerabilities (USN-5877-1)",
+        "vulnerability_state": "Open",
+        "accepted_count": 0,
+        "recasted_count": 0,
+        "counts_by_severity": [
+          {
+            "count": 3,
+            "value": 3
+          }
+        ],
+        "severity": 3,
+        "cvss_base_score": "7.8",
+        "cvss_temporal_score": "6.8",
+        "cvss3_base_score": "7.8",
+        "cvss3_temporal_score": "6.8",
+        "vpr": {
+          "score": 7.4,
+          "drivers": {
+            "age_of_vuln": {
+              "lower_bound": 365,
+              "upper_bound": 730
+            },
+            "exploit_code_maturity": "FUNCTIONAL",
+            "cvss3_impact_score": 5.9
+          }
+        }
+      },
+      {
+        "count": 1,
+        "plugin_family": "Ubuntu Local Security Checks",
+        "plugin_id": 168234,
+        "plugin_name": "Ubuntu 22.04 LTS : OpenSSL vulnerabilities (USN-6119-1)",
+        "vulnerability_state": "Open",
+        "accepted_count": 0,
+        "recasted_count": 0,
+        "counts_by_severity": [
+          {
+            "count": 1,
+            "value": 4
+          }
+        ],
+        "severity": 4,
+        "cvss_base_score": "10.0",
+        "cvss_temporal_score": "8.7",
+        "cvss3_base_score": "9.8",
+        "cvss3_temporal_score": "8.5",
+        "vpr": {
+          "score": 9.2,
+          "drivers": {
+            "age_of_vuln": {
+              "lower_bound": 0,
+              "upper_bound": 365
+            },
+            "exploit_code_maturity": "PROOF_OF_CONCEPT",
+            "cvss3_impact_score": 5.9,
+            "threat_intensity_last_28": "MEDIUM",
+            "threat_recency": "RECENT"
+          }
+        }
+      }
+    ],
+    "total_vulnerability_count": 7
+  },
+  "scan_history": {
+    "last_scan": "2024-01-15T06:00:00.000Z",
+    "scan_type": "credentialed"
+  },
+  "internal_metadata": {
+    "processing_time_ms": 1543,
+    "cache_hit": false,
+    "api_version": "v3"
+  }
+}
