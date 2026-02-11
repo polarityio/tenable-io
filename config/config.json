@@ -2,11 +2,12 @@
   "polarityIntegrationUuid": "a801d4e0-f10b-11ed-b578-7dac4b1703b9",
   "name": "Tenable.io",
   "acronym": "TEN",
-  "description": "Search for assets in Tenable.io by IP Address or Domain and view vulnerability information.",
+  "description": "Search for assets in Tenable.io by IP Address, Domain or CVE and view vulnerability information.",
   "entityTypes": [
     "IPv4",
     "IPv6",
-    "domain"
+    "domain",
+    "cve"
   ],
   "styles": [
     "./styles/styles.less"
@@ -55,6 +56,45 @@
       "description": "The Tenable.io secret key generated in the Tenable.io user dashboard.",
       "default": "",
       "type": "password",
+      "userCanEdit": false,
+      "adminOnly": true
+    },
+    {
+      "key": "minVulnerabilitySeverity",
+      "name": "Filter Assets by Vulnerability Severity",
+      "description": "Only return assets that have at least one vulnerability at or above the selected severity.  For example, if \"High\" is selected, only assets with a \"High\" or \"Critical\" vulnerability will be returned from searches. Defaults to \"No Filtering\".  Filtering only applies to IP and domain based asset searches.",
+      "type": "select",
+      "default": {
+        "value": "none",
+        "display": "No Filtering"
+      },
+      "options": [
+        {
+          "value": "critical",
+          "display": "Critical"
+        },
+        {
+          "value": "high",
+          "display": "High"
+        },
+        {
+          "value": "medium",
+          "display": "Medium"
+        },
+        {
+          "value": "low",
+          "display": "Low"
+        },
+        {
+          "value": "informational",
+          "display": "Informational"
+        },
+        {
+          "value": "none",
+          "display": "No Filtering"
+        }
+      ],
+      "multiple": false,
       "userCanEdit": false,
       "adminOnly": true
     }

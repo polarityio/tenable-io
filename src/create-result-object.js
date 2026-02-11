@@ -24,36 +24,46 @@ class PolarityResult {
 
     Logger.trace({ apiResponse }, 'buildResults arguments');
 
-    if (size(apiResponse.asset) === 0) {
-      return this.createNoResultsObject(apiResponse);
-    } else {
-      Logger.trace({ apiResponse }, 'buildResults arguments');
-      return this.createResultsObject(apiResponse);
-    }
+    const responses = Array.isArray(apiResponse) ? apiResponse : [apiResponse];
+
+    return responses.map((response) => {
+      if (size(response.assets || response.asset) === 0) {
+        return this.createNoResultsObject(response);
+      }
+      return this.createResultsObject(response);
+    });
   }
 
   createResultsObject(apiResponse) {
     const total_vulnerability_count =
-      apiResponse.vulnerabilities.total_vulnerability_count;
+      apiResponse.total_vulnerability_count ||
+      apiResponse.vulnerabilities?.total_vulnerability_count ||
+      apiResponse.asset?.vulnerabilities?.total_vulnerability_count ||
+      0;
+    const total_asset_count =
+      apiResponse.total_asset_count ||
+      (Array.isArray(apiResponse.assets) ? apiResponse.assets.length : 0);
+    const assetCount =
+      Array.isArray(apiResponse.assets) && apiResponse.assets.length > 0
+        ? apiResponse.assets.length
+        : 0;
+    const summaryLabel = assetCount > 1 ? 'Assets' : 'Vulnerabilities';
+    const summaryValue = assetCount > 1 ? total_asset_count : total_vulnerability_count;
 
-    return [
-      {
-        entity: apiResponse.entity,
-        data: {
-          summary: [`Vulnerabilities: ${total_vulnerability_count}`],
-          details: apiResponse
-        }
+    return {
+      entity: apiResponse.entity,
+      data: {
+        summary: [`${summaryLabel}: ${summaryValue}`],
+        details: apiResponse
       }
-    ];
+    };
   }
 
   createNoResultsObject(apiResponse) {
-    return [
-      {
-        entity: apiResponse.entity,
-        data: null
-      }
-    ];
+    return {
+      entity: apiResponse.entity,
+      data: null
+    };
   }
 }
 
